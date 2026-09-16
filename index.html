@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uday Sharma • Date Invite ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #3b2430;
+      background:
+        radial-gradient(circle at 10% 10%, #ffd7e5 0, transparent 28%),
+        radial-gradient(circle at 90% 90%, #e8dcff 0, transparent 30%),
+        linear-gradient(135deg, #fff7fa, #f7f1ff);
+      overflow-x: hidden;
+    }
+    .card {
+      width: min(560px, 100%);
+      padding: 34px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 30px;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 70px rgba(74, 37, 61, .15);
+      text-align: center;
+      position: relative;
+    }
+    .brand {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #b24b72;
+      margin-bottom: 18px;
+    }
+    .heart {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffe0ea, #fff);
+      font-size: 42px;
+      box-shadow: 0 12px 30px rgba(210, 91, 132, .18);
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      50% { transform: translateY(-7px); }
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 7vw, 46px);
+      line-height: 1.08;
+    }
+    .subtitle {
+      margin: 12px auto 26px;
+      max-width: 430px;
+      color: #765c68;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    button {
+      border: 0;
+      border-radius: 15px;
+      padding: 14px 26px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    button:hover { transform: translateY(-2px); }
+    .yes {
+      color: white;
+      background: linear-gradient(135deg, #e94f83, #c73568);
+      box-shadow: 0 10px 25px rgba(199, 53, 104, .25);
+    }
+    .no {
+      background: #f2e9ee;
+      color: #6f5a64;
+    }
+    .step { display: none; }
+    .step.active { display: block; }
+    .progress {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      margin: 0 0 24px;
+    }
+    .dot {
+      width: 30px;
+      height: 5px;
+      border-radius: 10px;
+      background: #eadde3;
+    }
+    .dot.active { background: #d74675; }
+    .field {
+      text-align: left;
+      margin: 15px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #684653;
+    }
+    input, select {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #ead6df;
+      border-radius: 14px;
+      outline: none;
+      background: #fff;
+      color: #402b35;
+      font-size: 15px;
+    }
+    input:focus, select:focus {
+      border-color: #dc6d93;
+      box-shadow: 0 0 0 4px rgba(220,109,147,.1);
+    }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .food {
+      padding: 16px 10px;
+      border: 1px solid #ead6df;
+      border-radius: 16px;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .2s;
+    }
+    .food.selected {
+      border-color: #d74675;
+      background: #fff0f5;
+      box-shadow: 0 7px 18px rgba(215,70,117,.12);
+    }
+    .back {
+      background: transparent;
+      color: #8a6875;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .success-icon {
+      font-size: 64px;
+      margin: 10px 0;
+    }
+    .signature {
+      margin-top: 24px;
+      font-weight: 800;
+      color: #b24b72;
+    }
+    .tiny {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #9a818b;
+    }
+    @media (max-width: 480px) {
+      .card { padding: 25px 18px; border-radius: 24px; }
+      .food-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section id="step1" class="step active">
+      <div class="brand">Uday Sharma • Date Invite</div>
+      <div class="heart">💌</div>
+      <h1>Will You Go On A Date?</h1>
+      <p class="subtitle">Someone has a very important question for you… and yes, there's a cute little plan waiting. ✨</p>
+      <div class="buttons">
+        <button class="yes" onclick="showStep(2)">YES, absolutely ❤️</button>
+        <button class="no" id="noBtn" onclick="moveNo()">NO 🙈</button>
+      </div>
+      <div class="tiny">Made with a little courage by Uday Sharma</div>
+    </section>
+
+    <section id="step2" class="step">
+      <div class="brand">Step 1 of 2</div>
+      <div class="progress"><span class="dot active"></span><span class="dot"></span></div>
+      <h1>Let's Make A Plan ✨</h1>
+      <p class="subtitle">Pick a date, time, and what you'd like to eat.</p>
+
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" placeholder="Enter your name" />
+      </div>
+      <div class="field">
+        <label for="date">Date</label>
+        <input id="date" type="date" />
+      </div>
+      <div class="field">
+        <label for="time">Time</label>
+        <input id="time" type="time" />
+      </div>
+
+      <div class="buttons">
+        <button class="back" onclick="showStep(1)">← Back</button>
+        <button class="yes" onclick="goFood()">Continue →</button>
+      </div>
+    </section>
+
+    <section id="step3" class="step">
+      <div class="brand">Step 2 of 2</div>
+      <div class="progress"><span class="dot active"></span><span class="dot active"></span></div>
+      <h1>What's For Dinner? 🍕</h1>
+      <p class="subtitle">Choose your favourite. No wrong answers here.</p>
+
+      <div class="food-grid">
+        <div class="food" onclick="pickFood(this,'Pizza 🍕')">Pizza 🍕</div>
+        <div class="food" onclick="pickFood(this,'Sushi 🍣')">Sushi 🍣</div>
+        <div class="food" onclick="pickFood(this,'Burgers 🍔')">Burgers 🍔</div>
+        <div class="food" onclick="pickFood(this,'Pasta 🍝')">Pasta 🍝</div>
+        <div class="food" onclick="pickFood(this,'Tacos 🌮')">Tacos 🌮</div>
+        <div class="food" onclick="pickFood(this,'Ramen 🍜')">Ramen 🍜</div>
+      </div>
+
+      <div class="buttons">
+        <button class="back" onclick="showStep(2)">← Back</button>
+        <button class="yes" onclick="confirmDate()">Confirm Date ❤️</button>
+      </div>
+    </section>
+
+    <section id="step4" class="step">
+      <div class="brand">It's Official ✨</div>
+      <div class="success-icon">🥰</div>
+      <h1>Date Confirmed!</h1>
+      <p class="subtitle" id="summary"></p>
+      <div class="signature">Uday Sharma dated you ❤️</div>
+      <div class="tiny">Now all that's left is to show up and have a great time.</div>
+    </section>
+  </main>
+
+  <script>
+    let selectedFood = "";
+
+    function showStep(n) {
+      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      document.getElementById("step" + n).classList.add("active");
+    }
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+      const x = Math.random() * 180 - 90;
+      const y = Math.random() * 100 - 50;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function goFood() {
+      const name = document.getElementById("name").value.trim();
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      if (!name || !date || !time) {
+        alert("Please fill in your name, date and time ❤️");
+        return;
+      }
+      showStep(3);
+    }
+
+    function pickFood(el, food) {
+      document.querySelectorAll(".food").forEach(x => x.classList.remove("selected"));
+      el.classList.add("selected");
+      selectedFood = food;
+    }
+
+    function confirmDate() {
+      if (!selectedFood) {
+        alert("Choose something yummy first 🍕");
+        return;
+      }
+
+      const name = document.getElementById("name").value.trim();
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+
+      const prettyDate = new Date(date + "T00:00:00").toLocaleDateString(undefined, {
+        day: "numeric", month: "long", year: "numeric"
+      });
+
+      document.getElementById("summary").innerHTML =
+        `Hey <b>${escapeHtml(name)}</b>! Your plan is set for <b>${prettyDate}</b> at <b>${escapeHtml(time)}</b>, with <b>${escapeHtml(selectedFood)}</b>.`;
+
+      showStep(4);
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, c => ({
+        "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+      }[c]));
+    }
+  </script>
+</body>
+</html>
